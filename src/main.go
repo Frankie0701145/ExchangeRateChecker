@@ -8,7 +8,6 @@ import (
 	"log"
 	"net/http"
 	"os"
-	"strings"
 )
 
 func main() {
@@ -55,7 +54,7 @@ func CheckCurrencySupport(currencyCode string) string {
 			break
 		}
 		//check if the current record  matches the passed currency code
-		if strings.EqualFold(currencyCode, record[2]) {
+		if currencyCode == record[2] {
 			//if they match return a message stating the currency are matching
 			answer = fmt.Sprintf("%s currency code is supported.", currencyCode)
 			break
