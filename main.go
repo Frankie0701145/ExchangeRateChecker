@@ -10,7 +10,6 @@ import (
 )
 
 func main(){
-	
 	currencyCode := flag.String("currencyCode", "", "Please pass the ISO 4217 currency code.")
 	flag.Parse()
 	fmt.Println(*currencyCode)
