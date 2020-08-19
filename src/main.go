@@ -7,12 +7,17 @@ import (
 	"io"
 	"log"
 	"net/http"
+	"os"
 	"strings"
 )
 
 func main() {
-	currencyCode := flag.String("currencyCode", "", "Please pass the ISO 4217 currency code.")
+	currencyCode := flag.String("currencyCode", "ISOCODE", "Please pass the ISO 4217 currency code.")
 	flag.Parse()
+	if *currencyCode == "ISOCODE" {
+		flag.PrintDefaults()
+		os.Exit(1)
+	}
 	answer := CheckCurrencySupport(*currencyCode)
 	fmt.Println(answer)
 }
