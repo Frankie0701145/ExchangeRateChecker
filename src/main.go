@@ -7,12 +7,12 @@ import (
 	"io"
 	"log"
 	"net/http"
+	"strings"
 )
 
 func main() {
 	currencyCode := flag.String("currencyCode", "", "Please pass the ISO 4217 currency code.")
 	flag.Parse()
-	fmt.Println(*currencyCode)
 	answer := CheckCurrencySupport(*currencyCode)
 	fmt.Println(answer)
 }
@@ -46,13 +46,13 @@ func CheckCurrencySupport(currencyCode string) string {
 		//check if there is a record
 		if err == io.EOF {
 			//if there is no more record break the loop and return a message stating the currency is not supported
-			answer = fmt.Sprintf("This %s currency code is not supported.", currencyCode)
+			answer = fmt.Sprintf("%s currency code is not supported.", currencyCode)
 			break
 		}
 		//check if the current record  matches the passed currency code
-		if currencyCode == record[2] {
+		if strings.EqualFold(currencyCode, record[2]) {
 			//if they match return a message stating the currency are matching
-			answer = fmt.Sprintf("This %s currency code is supported.", currencyCode)
+			answer = fmt.Sprintf("%s currency code is supported.", currencyCode)
 			break
 		}
 	}
